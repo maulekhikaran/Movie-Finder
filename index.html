@@ -1,0 +1,536 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="./assets/css/style.css"> -->
+    <title>Movie Finder</title>
+
+    <style>
+        * {
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    /* border: 2px solid red; */
+}
+
+
+
+
+.title{
+    text-align: center;
+    font-size: 75px;
+    text-shadow: 2px .5px 5px rgb(43, 43, 43);
+    cursor: pointer;
+}
+
+body {
+    height: 100%;
+    background: linear-gradient(23deg, #9cbae0 2%, rgb(183, 244, 255) 100%); 
+}
+
+h1{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-family: 'Russo One', sans-serif;
+}
+
+h2{
+    font-size: 5rem;
+    text-shadow: 1px 1px 10px black;
+    text-decoration: underline;
+}
+
+header {
+    display: flex;
+
+}
+
+p {
+
+    font-size: large;
+    text-align: center;
+    text-decoration: underline;
+    text-shadow: 1px .5px .5px rgb(43, 43, 43);
+}
+
+div.columns {
+    padding-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pic {
+    padding-left: .2rem;
+    display: flex;
+    align-items: center;
+}
+
+div.checkers {
+    display: flex;
+    padding: auto;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-shadow: 0px 0px 1px rgb(43, 43, 43);
+    
+}
+
+.search-region {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    padding-top: 1rem;
+}
+.results {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    padding-top: 1rem;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+}
+
+/* This styling is for the buttons sown in the search list */
+div.media-content button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: #dffaff;
+    background: #62c0ff;
+    
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+  
+  /* Style the submit button */
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #dffaff;
+    background: #62c0ff;
+    color: rgb(70, 149, 201);
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+}
+  
+  form.example button:hover {
+    background: #62c0ff;
+    background: #83ecff;
+    box-shadow: 1px 1px 20px rgb(255, 255, 255);
+    transition: 0.1s;
+}
+  
+  /* Clear floats */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.movie-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 10px 50px;
+    overflow-x: auto;
+}
+
+.card-content {
+    background: radial-gradient(circle, rgba(148,187,233,1) -7%, rgba(127,165,202,1) 11%, rgba(41,88,112,1) 100%);
+}
+
+.card {
+
+    object-fit: fill;
+    margin: 0px;
+    padding: 0px;
+    width: 30%;
+    border: 3px solid black;
+    border-radius: 1rem;
+}
+
+
+/* Adding a radius to the final image after selecting correct movie */
+div.picture-cars img {
+    border-radius: 10px;
+}
+
+.card-image:first-child img {
+    border-top-left-radius: .7rem;
+    border-top-right-radius: .7rem;
+}
+
+.card-content:last-child,
+.card-footer:last-child,
+.card-header:last-child {
+    border-bottom-left-radius: .7rem;
+    border-bottom-right-radius: .7rem;
+}
+
+.picture-cars {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 3.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px black;
+    padding-bottom: 2rem;
+    background: linear-gradient(35deg, rgba(2, 2, 14, 0.521), rgba(209, 235, 253, 0.562));
+    
+}
+
+#movie-text {
+    overflow-x: auto;
+}
+
+.description-card p {
+    text-decoration: none;
+    font-size: 12px;
+}
+
+  .hidden{
+    display: none;
+}
+/*buttons in selected movie*/
+
+.Netflix {background-color: #c73b31;} /* Red */
+
+.Hulu {background-color: black; color: rgb(0, 224, 0)} /* Green */
+
+.Hbomax {background-color: rgb(104, 54, 240)} /* purple */
+
+.Apple {background-color: rgb(0, 0, 0);
+        
+}
+
+.Amazon {background-color: rgb(39, 48, 75)}
+
+.Disneyplus {background-color: rgb(30, 30, 59)}
+
+.button {
+    color: whitesmoke;
+}
+
+.butt {
+    width: 7rem;
+    height: 3rem;
+    border-radius: .5rem;
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+    opacity: .8;
+    
+}
+
+.noResultz {
+    font-size: 20px;
+    color: rgb(204, 53, 27);
+    text-align: center;
+    /* text-shadow: 0px 0px 5px rgb(0, 0, 0); */
+}
+
+.butt:hover {
+    opacity: 1;
+    box-shadow: 1px 1px 20px rgb(255, 255, 255);
+    transition: 0.1s;
+}
+    </style>
+</head>
+
+
+<body>
+    <section class="hero is-info">
+        <div class="hero-body">
+            <p class="title" id="return">
+                MOVIE FINDER<img src="./assets/imgs/clipart2791330 (1).png" width="95px" alt="">
+            </p>
+            <p class="subtitle">
+                Finding movies based on streaming services!
+            </p>
+        </div>
+    </section>
+
+    <section class="results hidden" id="results">
+        <div class="columns">
+            <div class="column is-4 picture-cars" id="picture1"></div>
+            <div class="column is-8 right-column">
+                <div class="column movie-title" id="movie-title"></div>
+                <div id="stream-btns" class="column location-card">
+                    <!-- <button class="Netflix butt">Netflix</button>
+                    <button class="Hulu butt">Hulu</button>
+                    <button class="Hbomax butt">HBO</button>
+                    <button class="Apple butt">Apple TV</button>
+                    <button class="Amazon butt">PRIME</button>
+                    <button class="Disneyplus butt">Disney +</button> -->
+                </div>
+                <div id="noResults" class="hidden noResultz">
+                    Sorry this movie is not available in any of the top 6 streaming services.<br>
+                    Please try a different movie.
+                </div>
+                <div id="description" class="column description-card"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="search-region" class="search-region">
+        <div class="columns">
+            <div class="column is-7">
+                <form class="example">
+                    <input id="user-search" class="input is-large" type="text" placeholder="Search For A Movie">
+                    <button id="btn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="./assets/js/script.js"></script> -->
+    <script>
+        var JBKey = "f4ceaec9f5mshd595b95b571776ap16c077jsn471bb392e0d1"
+var CarlosKey = "f23c6f8922msh66c1e577a5d9a54p1f699djsn591541dac664"
+var IsrealKey = "68e56fb629mshd9bc9c2bab39abdp1e8f8ejsn5a5cdb6e24a2"
+var AydinKey = "5cfd71de82msh5e735751f442143p1e03bcjsn78a94c1d0a36"
+
+function getMovieList(e) {
+    e.preventDefault();
+    //!!!!only clears once!!!!
+    if ($("#noResultOmdb").length)
+        $("#noResultOmdb").empty()
+
+
+    var omdbRequestURL = "https://omdbapi.com/?s=" + $("#user-search").val() + "&type=movie&apikey=405ba6dc";
+    $("#noResults").addClass("hidden");
+    $("#noResultOmdb").addClass("hidden");
+    $("#movie-container").focus();
+    $("#movie-container").removeClass("hidden");
+    $("#results").addClass("hidden")
+    fetch(omdbRequestURL)
+        .then(function (res) {
+            console.log(res.status);
+            return res.json();
+        })
+        .then(function (data) {
+            console.log(data.Response);
+
+            if (data.Response === "False") {
+                $("<div/>", {
+                    id: "noResultOmdb",
+                    class: "noResultz"
+                }).text("Sorry we couldn't find the movie you were looking for. Please check your spelling").appendTo("#search-region");
+                if ($("#movie-container").length)
+                    $("#movie-container").empty()
+                return;
+            }
+            $("#noResultOmdb").addClass("hidden");
+            if ($("#movie-container").length)
+                $("#movie-container").empty()
+            // display results here
+            // create HTML here
+            $("<div/>", {
+                id: "movie-container",
+                class: "movie-container"
+            }).appendTo("#search-region");
+
+
+            for (var i = 0; i < data.Search.length; i++) {
+                // main card
+                $("<div/>", {
+                    id: "card" + i,
+                    class: "card"
+                }).appendTo("#movie-container");
+                // image container
+                $("<div/>", {
+                    id: "card-image" + i,
+                    class: "card-image"
+                }).appendTo("#card" + i);
+                $("<figure/>", {
+                    id: "figure" + i,
+                    class: "image is-4by3"
+                }).appendTo("#card-image" + i);
+
+                if (data.Search[i].Poster === "N/A") {
+                    $("<img/>", {
+                        src: "./assets/imgs/spongemiboy.png",
+                        alt: data.Search[i].Title
+                    }).appendTo("#figure" + i);
+                    console.log("no pic")
+                } else {
+                    $("<img/>", {
+                        src: data.Search[i].Poster,
+                        alt: data.Search[i].Title
+                    }).appendTo("#figure" + i);
+                }
+                // content container
+                $("<div/>", {
+                    id: "card-content" + i,
+                    class: "card-content"
+                }).appendTo("#card" + i);
+                $("<div/>", {
+                    id: "media" + i,
+                    class: "media-content"
+                }).appendTo("#card-content" + i);
+                // add movie title and stuff here
+                $("<p/>", {
+                    // add style classes here
+                }).text(data.Search[i].Title + " " + data.Search[i].Year).appendTo("#media" + i);
+                $("<button/>", {
+                    id: "button" + i,
+
+                    class: "button",
+                    text: "This one!"
+                }).click({
+                    title: data.Search[i].Title,
+                    imdbID: data.Search[i].imdbID,
+                    poster: data.Search[i].Poster
+                },
+                    getServices).appendTo("#media" + i);
+            }
+        });
+}
+
+function getServices(e) {
+    // Hide the cards continer
+    $("#movie-container").addClass("hidden");
+    $("#results").removeClass("hidden");
+    if ($("#picture1").length)
+        $("#picture1, #description, #movie-title").empty()
+
+
+    // get plot point
+    var plotURL = "http://omdbapi.com/?i=" + e.data.imdbID + "&plot=full&r=json&apikey=405ba6dc&"
+    fetch(plotURL)
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+            $("<p/>", {
+                id: "movie-text"
+            }).text(data.Plot).appendTo("#description");
+        })
+    console.log(e.data.poster)
+    $("<img/>", {
+        src: e.data.poster,
+        alt: e.data.title
+    }).appendTo("#picture1");
+    $("<h2/>").html(e.data.title).appendTo("#movie-title");
+
+    fetch("https://gowatch.p.rapidapi.com/lookup/title/imdb_id", {
+        method: "POST",
+        headers: {
+            "content-type": "application/x-www-form-urlencoded",
+            "x-rapidapi-host": "gowatch.p.rapidapi.com",
+            "x-rapidapi-key": AydinKey
+        },
+        body: JSON.stringify({
+            id: e.data.imdbID,
+            type: "movie",
+            country: "us"
+        })
+    })
+        .then(function (res) {
+            console.log(res.status)
+            return res.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            parseResults(data.offers);
+        })
+}
+
+function parseResults(servicesArray) {
+    var service, serviceURL;
+    var result = false;
+    if (typeof servicesArray !== "undefined") {
+        for (var i = 0; i < servicesArray.length; i++) {
+            if ((servicesArray[i].buy === 0 && servicesArray[i].rent === 0 && servicesArray[i].channel === null) && servicesArray[i].collection_name !== "The") {
+                console.log(servicesArray[i].url)
+                service = servicesArray[i].url.split(".")[1];
+                service = service.charAt(0).toUpperCase() + service.slice(1);
+                console.log(service);
+                serviceURL = servicesArray[i].url;
+                $("<button/>", {
+                    class: service + " butt",
+                    id: "button" + i
+                }).html(service).val(serviceURL).click(link).appendTo("#stream-btns")
+                result = true;
+            }
+        }
+    }
+    if (!result) {
+        console.log("No movie found!");
+        $("#noResults").removeClass("hidden");
+    }
+
+}
+
+function link(e) {
+    window.open(e.target.value, "_blank");
+}
+
+$("#return").click(function () {
+    location.reload()
+});
+
+$(function () {
+    console.log("Ready!");
+    $("#btn").click(getMovieList)
+});
+
+
+    </script>
+
+</body>
+
+</html>
